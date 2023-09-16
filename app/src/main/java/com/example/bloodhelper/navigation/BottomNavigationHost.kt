@@ -18,25 +18,25 @@ fun BottomNavigation(navController: NavHostController){
         startDestination = Screen.Splash.route
     ) {
         composable(route = Screen.Splash.route) {
-            AnimatedSplashScreen(navController = navController)
+            AnimatedSplashScreen(navController)
         }
         composable(route = BottomBar.Home.route)
         {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(route = BottomBar.Receiver.route)
         {
-            MyDonorScreen()
+            MyDonorScreen(navController)
         }
         composable(route = BottomBar.Donor.route)
         {
-            FindMyDonorScreen()
+            FindMyDonorScreen(navController)
         }
         composable(route = ROUTE_HOME){
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(route = ROUTE_LOGIN_PAGE){
-            LoginScreen()
+            LoginScreen(navController)
         }
         composable(route= ROUTE_SIGNUP_PAGE){
             SignUpScreen(navController)

@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -32,14 +33,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.bloodhelper.data.AuthRepository
 import com.example.bloodhelper.ui.theme.BloodHelperTheme
 import com.example.bloodhelper.ui.theme.LightRed
-import com.example.bloodhelper.ui.theme.pages.signup.SignUpScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LoginScreen(){
+fun LoginScreen(navController: NavHostController){
     Column(
         modifier = Modifier
             .background(Color.White)
@@ -47,8 +49,9 @@ fun LoginScreen(){
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        var context = LocalContext.current
         Text(
-            text ="SignUp",
+            text ="Login",
             fontSize = 30.sp,
             color = LightRed,
             modifier = Modifier.padding(20.dp),
@@ -81,7 +84,9 @@ fun LoginScreen(){
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                var authRepository = AuthRepository(navController, context)
+                authRepository.login(email.text.trim(), password.text.trim()) },
             colors = ButtonDefaults.buttonColors(Color.White),
             shape = RoundedCornerShape(20.dp),
             border = BorderStroke(2.dp, color = Color.LightGray)
@@ -96,6 +101,6 @@ fun LoginScreen(){
 @Composable
 fun LoginScreenPreview() {
     BloodHelperTheme {
-        LoginScreen()
+        LoginScreen(rememberNavController())
     }
 }

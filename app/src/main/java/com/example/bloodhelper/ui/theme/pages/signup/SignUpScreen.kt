@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,6 +38,7 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.bloodhelper.data.AuthRepository
 //import com.example.bloodhelper.data.AuthRepository
 import com.example.bloodhelper.navigation.ROUTE_LOGIN_PAGE
 import com.example.bloodhelper.ui.theme.BloodHelperTheme
@@ -48,10 +51,11 @@ fun SignUpScreen(navController: NavHostController) {
         modifier = Modifier
             .background(Color.White)
             .padding(10.dp)
+            .verticalScroll(rememberScrollState())
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally)
     {
-//        var  context = LocalContext.current
+        var  context = LocalContext.current
         Text(
             text ="SignUp",
             fontSize = 30.sp,
@@ -100,6 +104,7 @@ fun SignUpScreen(navController: NavHostController) {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
+
         OutlinedTextField(
             value = age,
             onValueChange = {age=it},
@@ -151,8 +156,12 @@ fun SignUpScreen(navController: NavHostController) {
             modifier = Modifier.fillMaxWidth(0.8f)
         )
 
+        Spacer(modifier = Modifier.height(20.dp))
+
         Button(
-            onClick = { TODO() },
+            onClick = {
+                var  authRepository = AuthRepository(navController, context)
+                authRepository.signup(name.text.trim(), email.text.trim(), password.text.trim()) },
             colors = ButtonDefaults.buttonColors(Color.White),
             shape = RoundedCornerShape(20.dp),
             border = BorderStroke(2.dp, color = Color.LightGray)

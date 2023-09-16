@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -23,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bloodhelper.R
 import com.example.bloodhelper.navigation.BottomBar
+import com.example.bloodhelper.navigation.ROUTE_SIGNUP_PAGE
 import kotlinx.coroutines.delay
 
 //MY ANIMATED SPLASH SCREEN ISNT WORKING
@@ -48,7 +46,7 @@ fun AnimatedSplashScreen(navController: NavHostController) {
         startAnimation = true
         delay(2000)
         navController.popBackStack()
-        navController.navigate(BottomBar.Home.route)
+        navController.navigate(ROUTE_SIGNUP_PAGE)
     }
     Splash(alpha = alphaAnim.value)
 }
